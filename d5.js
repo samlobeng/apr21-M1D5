@@ -245,23 +245,30 @@ let rollTheDices = function(n) {
 /* Ex.9
    Write a function called "howManyDays" which receives a date as a parameter and should return the number of days passed since that date.
 */
-// let howManyDays = function(date) {
-//   let currentDate = new Date;
-//   let currentDay = currentDate.getDate(); 
-//   date = currentDate.getDate();
-//   return Math.abs(currentDay - date);
-// }
+const howManyDays = function(date1, date2) {      //https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/
+  var date1 = new Date(date1);
+  var date2 = new Date(date2);
+  // var Difference_In_Time = date2.getTime() - date1.getTime();
+  // var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+  let diffDays = parseInt((date1 - date2) / (1000 * 60 * 60 * 24), 10);
+  return diffDays; 
+}
+
 
 // /* Ex.10
 //    Write a function called "isTodayMyBirthday" which should return true if today's your birthday, false otherwise.
-// */
-// let isTodayMyBirthday = function() {
-//   const birthDay = new Date('April 16, 2021')
-//   const today = new Date;
-//   return (today.getDay() && today.getMonth()) === birthDay ? true:false
-// }
-// console.log(isTodayMyBirthday());
+let isTodayMyBirthday = function() {    //https://www.techiedelight.com/get-current-date-javascript/
+  var today = new Date();
+  var now = today.toLocaleDateString('en-US');
+  if (now === "05/08/2021") {
+      return true;
+  }
+  else {
+      return false;
+  }
+}
 
+console.log("Today my birthday!! : " + isTodayMyBirthday());
 /* Ex.11
    Write a function called "deleteProp" which receives an object and a string as parameters, and returns the given object after deleting its property named as the given string.
 */
@@ -317,32 +324,35 @@ let onlyInThisMillennium = function(){
     Write a function called "getMovieById" which receives an id as a parameter and returns the movie with the given id.
 */
 let getMovieById = function(id) {
-
-    return movies[id];
+  for(movie of movies){
+    if(movie.imdbID === id)
+    return movie
+  }
 }
+//console.log(getMovieById("tt4154796"))
 
 /* Ex.17
     Write a function called "sumAllTheYears" which returns the sum of all the years in which the movies provided have been produced.
 */
-let sumAllTheYears = function(){
-  let yearArray = [];
-  let sum;
-  for(movie of movies){
-   yearArray.push(movie.Year);
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
-   sum = Number(yearArray.reduce(reducer));
-
+const sumAllTheYears = function() {
+  let sum = 0;
+  for (i = 0; i < movies.length; i++) {
+      sum += parseInt(movies[i].Year);
   }
   return sum;
 }
+console.log(sumAllTheYears())
+
 /* Ex.18
     Write a function called "searchByTitle" which receives a string as a parameter and returns all the movies which contain that string in the title.
 */
 let searchByTitle = function(title) {
   for(movie of movies){
-    if(movie.Title.includes(title, 0)){
+    if(movie.Title.includes(title)){
       return movie
     } 
   }
 }
-console.log(searchByTitle("Lord"));
+
+
+
